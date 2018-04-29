@@ -1,23 +1,24 @@
 // Students Store Module - import other modules
-import { normalize, schema } from 'normalizr'
+import { normalize, schema } from 'normalizr';
 
 // import conteful client and tokens
-import { createClient } from 'contentful'
-import tokens from '~/tokens/'
+import { createClient } from 'contentful-management';
+import Configuration from '../services/configuration';
+import Environment from '../environment';
 
-// import createClient directly
-const client = createClient({
-  space: tokens.contentful.space,
-  accessToken: tokens.contentful.deliveryAPIToken
-})
+const locale = 'en-US'
 
 const studentSchema = new schema.Entity('students', {}, {
   idAttribute: (value) => {
-    return value.fields.id
+    return value.fields.id[locale]
   },
   processStrategy: function(value, parent) {
+    var values = Object.keys(value.fields).reduce((prev, key) => {
+      prev[key] = value.fields[key][locale];
+      return prev;
+    }, {});
     return {
-      ...value.fields,
+      ...values,
       sysId: value.sys.id
     }
   }
@@ -51,10 +52,14 @@ export const actions = {
 
   async init ({ commit }) {
 
-    // console.log('students init')
+    // import createClient directly
+    const client = createClient({
+      accessToken: Configuration.accessToken
+    });
+    const space = client.getSpace(Configuration.space)
 
     const [students] = await Promise.all([
-      client.getEntries({'content_type': 'students'})
+      space.then(space => space.getEntries({'content_type': 'students'}))
     ])
 
     commit(setStudentsRaw, students.items)

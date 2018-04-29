@@ -1,7 +1,9 @@
 <template lang="pug">
   section
     h1 Students Listing
-    .studentsListing
+    .studentsListing(
+      v-if="students && students.entities"
+    )
       student-short(
         v-for="student in students.entities.students"
         :key="student.id"
