@@ -26,8 +26,8 @@ export default {
 
   data: () => {
     return {
-
-    };
+      activeStudentRow: null
+    }
   },
 
   computed: {
