@@ -11,7 +11,7 @@ const client = createClient({
   accessToken: tokens.contentful.deliveryAPIToken
 })
 
-const equipmentSchema = new schema.Entity('equipment', {}, {
+const equipmentSchema = new schema.Entity('item', {}, {
   idAttribute: (value) => {
     return value.fields.id
   },
@@ -26,22 +26,58 @@ const equipmentSchema = new schema.Entity('equipment', {}, {
 const equipmentList = new schema.Array(equipmentSchema)
 
 export const state = () => ({
-  studentsRaw: [],
-  students: []
+  uniformBags: {},
+  uniformBagsRaw: {},
+  trackSuits: {},
+  trackSuitsRaw: {},
+  shakos: {},
+  shakosRaw: {},
+  jackets: {},
+  jacketsRaw: {},
+  guantlets: {},
+  guantletsRaw: {},
+  colorGuardShirts: {},
+  colorGuardShirtsRaw: {},
+  bibbers: {},
+  bibbersRaw: {}
 })
 
 export const getters = {
+  allEquipmentIds(state, getters) {
 
+  },
+
+  allEquipmentByIds( state, getters) {
+
+  },
+
+  allEquipmentRaw(state, getters) {
+
+    // console.log(this.uniformBagsRaw,
+    //     this.trackSuitsRaw,
+    //     this.shakosRaw,
+    //     this.jacketsRaw,
+    //     this.guantletsRaw,
+    //     this.colorGuardShirtsRaw,
+    //     this.bibbersRaw)
+
+    const mergedArrays = [].concat.apply([],
+      [
+        state.uniformBagsRaw,
+        state.trackSuitsRaw,
+        state.shakosRaw,
+        state.jacketsRaw,
+        state.guantletsRaw,
+        state.colorGuardShirtsRaw,
+        // state.bibbersRaw
+      ]
+    )
+
+    return mergedArrays
+  },
 }
 
 export const mutations = {
-  setStudentsRaw: (state, studentsRaw) => {
-    state.studentsRaw = studentsRaw
-  },
-  setStudents: (state, students) => {
-    state.students = students
-  },
-
   setUniformBags: (state, uniformBags) => {
     state.uniformBags = uniformBags
   },
@@ -131,9 +167,6 @@ export const actions = {
 
     commit('setColorGuardShirtsRaw', colorGuardShirts.items)
     commit('setColorGuardShirts', normalize(colorGuardShirts.items, equipmentList))
-
-    commit('setBibbersRaw', bibbers.items)
-    commit('setBibbers', normalize(bibbers.items, equipmentList))
   }
 }
 
