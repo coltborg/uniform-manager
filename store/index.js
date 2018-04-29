@@ -17,6 +17,7 @@ export const actions = {
   // loads data from server only
   async nuxtServerInit ({ dispatch }) {
       await dispatch('students/init')
+      await dispatch('equipment/init')
   }
 }
 
