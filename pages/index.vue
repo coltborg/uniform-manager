@@ -1,7 +1,6 @@
 <template>
   <section class="container">
     <div>
-      <app-logo/>
       <h1 class="title">
         uniform-manager
       </h1>
@@ -26,13 +25,7 @@
 </template>
 
 <script>
-import AppLogo from "~/components/AppLogo.vue";
-
-export default {
-  components: {
-    AppLogo
-  }
-};
+export default {};
 </script>
 
 <style>
