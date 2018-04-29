@@ -13,7 +13,12 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
-    "nuxt": "^1.0.0"
+    "contentful": "^6.1.0",
+    "css-loader": "^0.28.11",
+    "normalizr": "^3.2.4",
+    "nuxt": "^1.0.0",
+    "pug": "^2.0.3",
+    "pug-loader": "^2.4.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
