@@ -18,7 +18,8 @@
           v-for="student in students.entities.students"
           :key="student.id"
           :student="student"
-          v-on:studentClicked="handleClickedStudent"
+          :activeStudentRowId="activeStudentRowId"
+          v-on:selectStudentRow="handleSelectStudentRow"
         )
 </template>
 
@@ -33,7 +34,7 @@ export default {
 
   data: () => {
     return {
-      activeStudent: {}
+      activeStudentRow: null
     };
   },
 
@@ -41,12 +42,17 @@ export default {
     ...mapState("students", {
       students: state => state.students,
       studentRaw: state => state.studentsRaw
-    })
+    }),
+
+    activeStudentRowId() {
+      let activeStudentRow = this.activeStudentRow
+      return (activeStudentRow) ? activeStudentRow.id : false
+    }
   },
 
   methods: {
-    handleClickedStudent(student) {
-      this.activeStudent = student;
+    handleSelectStudentRow(student) {
+      this.activeStudentRow = student;
     }
   }
 };

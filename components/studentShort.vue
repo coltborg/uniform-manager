@@ -1,6 +1,8 @@
 <template lang="pug">
   .grid(
-    @click="clickedStudent"
+    @click="selectStudentRow"
+    :class="{'bg-orange-lightest border-orange': activeStudentRowId === student.id}"
+
   )
     .px-2.py-2.text-black {{ student.name }}
     .px-2.py-2.text-black #01
@@ -16,16 +18,21 @@
 import { mapState } from "vuex";
 
 export default {
-  // data: () => {
-  //   return: {
 
-  //   }
-  // },
+  data: () => {
+    return {
+
+    }
+  },
 
   props: {
     student: {
       type: Object,
       required: true
+    },
+
+    activeStudentRowId: {
+      default: false
     }
   },
 
@@ -37,8 +44,8 @@ export default {
   },
 
   methods: {
-    clickedStudent() {
-      this.$emit("studentClicked", this.student);
+    selectStudentRow() {
+      this.$emit("selectStudentRow", this.student);
     }
   }
 };
@@ -52,5 +59,6 @@ export default {
     / 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-column-gap: 1rem;
   grid-row-gap: 0.5rem;
+  cursor: pointer;
 }
 </style>
