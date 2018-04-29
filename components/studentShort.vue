@@ -1,14 +1,21 @@
 <template lang="pug">
-  .studentShort(
+  .grid(
     @click="clickedStudent"
-  ) {{ student.name }}
+  )
+    .px-2.py-2.text-black {{ student.name }}
+    .px-2.py-2.text-black #01
+    .px-2.py-2.text-black Md
+    .px-2.py-2.text-black #45
+    .px-2.py-2.text-black #40
+    .px-2.py-2.text-black #40
+    .px-2.py-2.text-black Md
+    .px-2.py-2.text-black #105
 </template>
 
 <script>
-import { mapState } from "vuex"
+import { mapState } from "vuex";
 
 export default {
-
   // data: () => {
   //   return: {
 
@@ -16,28 +23,34 @@ export default {
   // },
 
   props: {
-    'student': {
+    student: {
       type: Object,
       required: true
     }
   },
 
   computed: {
-    ...mapState('students', {
-      'students': state => state.students,
-      'studentRaw': state => state.studentsRaw
+    ...mapState("students", {
+      students: state => state.students,
+      studentRaw: state => state.studentsRaw
     })
   },
 
   methods: {
     clickedStudent() {
-      // console.log(this.student.name)
-      this.$emit('studentClicked', this.student)
+      this.$emit("studentClicked", this.student);
     }
   }
 };
 </script>
 
-<style>
-
+<style lang="postcss" scoped>
+.grid {
+  display: grid;
+  grid-template:
+    1fr
+    / 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-column-gap: 1rem;
+  grid-row-gap: 0.5rem;
+}
 </style>

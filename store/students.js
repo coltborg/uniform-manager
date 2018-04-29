@@ -4,17 +4,14 @@ import { normalize, schema } from 'normalizr';
 // import conteful client and tokens
 import { createClient } from 'contentful-management';
 import Configuration from '../services/configuration';
-import Environment from '../environment';
-
-const locale = 'en-US'
 
 const studentSchema = new schema.Entity('students', {}, {
   idAttribute: (value) => {
-    return value.fields.id[locale]
+    return value.fields.id[Configuration.locale]
   },
   processStrategy: function(value, parent) {
     var values = Object.keys(value.fields).reduce((prev, key) => {
-      prev[key] = value.fields[key][locale];
+      prev[key] = value.fields[key][Configuration.locale];
       return prev;
     }, {});
     return {
