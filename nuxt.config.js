@@ -34,5 +34,9 @@ module.exports = {
         })
       }
     }
-  }
+  },
+  /*
+  ** Link to CSS
+  */
+ css: ['~/assets/css/tailwind.css']
 }
