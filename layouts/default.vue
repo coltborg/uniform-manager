@@ -1,6 +1,9 @@
 <template lang="pug">
   div.font-sans.text-black
-    header
-      h1.mb-4.text-2xl.text-green.bg-green-lightest.text-center Global Header (Goes Here)
+    header.text-green.bg-green-lightest
+      h1.mb-4.text-2xl.text-center Global Header (Goes Here)
+      .mx-4
+        nuxt-link.mr-4.text-green.no-underline(to="/") Home
+        nuxt-link.text-green.no-underline(to="students") Students
     nuxt
 </template>
