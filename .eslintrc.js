@@ -33,6 +33,7 @@ module.exports = {
     'no-console': 'warn',
     'no-alert': 'warn',
     'no-param-reassign': 0,
+    'linebreak-style': 'off',
     'quote-props': ['error', 'consistent'],
     // vue rules
     'vue/order-in-components': ['error', {
