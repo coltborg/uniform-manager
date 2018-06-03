@@ -79,6 +79,7 @@ export const getters = {
       prev[value.id] = {
         id: value.id,
         number: value.number,
+        assignedToStudentId: value.assignedToStudentId,
         type: 'Bibber',
         description: `${value.waist} W ${value.inseam} L`,
       };
