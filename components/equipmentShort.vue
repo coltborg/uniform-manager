@@ -1,11 +1,11 @@
 <template lang="pug">
   .grid(
-    v-if="equipment.fields"
+    v-if="equipment"
+    :class="{'bg-orange-lightest border-orange': active}"
   )
-    .px-2.py-2.text-black {{ equipmentId }}
+    .px-2.py-2.text-black {{ equipment.number }}
     .px-2.py-2.text-black {{ ownerDisplayName }}
-    .px-2.py-2.text-black {{ ownerDisplayId }}
-    .px-2.py-2.text-black ---
+    .px-2.py-2.text-black {{ }}
     .px-2.py-2.text-black ---
     .px-2.py-2.text-black ---
     .px-2.py-2.text-black ---
@@ -14,19 +14,17 @@
 
 <script>
 import { mapState } from 'vuex';
-import Configuration from '../services/configuration';
+// import Configuration from '../services/configuration';
 
 export default {
-  // data: () => {
-  //   return: {
-
-  //   }
-  // },
-
   props: {
     equipment: {
       type: Object,
       required: true,
+    },
+    active: {
+      type: [Boolean],
+      default: false,
     },
   },
 
@@ -37,28 +35,23 @@ export default {
     }),
 
     owner() {
-      const assignedStudent = this.equipment.fields.assignedToStudentId;
+      const assignedStudent = this.equipment.assignedToStudentId;
 
       if (assignedStudent) {
         return assignedStudent;
       }
-
 
       return false;
     },
 
     ownerDisplayName() {
       const { owner } = this;
-      return (owner && owner.fields) ? owner.fields.name : '---';
+      return (owner) ? owner.name : '---';
     },
 
     ownerDisplayId() {
       const { owner } = this.owner;
-      return (owner && owner.fields) ? owner.fields.id : '---';
-    },
-
-    equipmentId() {
-      return this.equipment.fields.id[Configuration.locale];
+      return (owner) ? owner.id : '---';
     },
   },
 
