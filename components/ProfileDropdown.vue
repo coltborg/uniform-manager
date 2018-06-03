@@ -1,10 +1,10 @@
 <template>
   <on-click-outside :do="close">
     <div
-      :class="{ 'is-active': isOpen }"
       class="relative">
       <button
         ref="button"
+        :class="{ 'is-active': isOpen }"
         type="button"
         class="p-1 rounded-full focus-ring hover:bg-grey-light"
         @click="open"
@@ -88,5 +88,10 @@ export default {
 .focus-ring:focus {
   outline: 0;
   box-shadow: 0 0 0 3px rgba(52, 144, 220, 0.5);
+  background-color: #dae1e7;
+}
+
+.is-active {
+  background-color: #dae1e7;
 }
 </style>
