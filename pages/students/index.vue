@@ -74,6 +74,10 @@ export default {
       studentRaw: state => state.studentsRaw,
     }),
 
+    ...mapState('equipment', {
+      equipment: state => state.equipment,
+    }),
+
     activeStudentRowId() {
       const { activeStudentRow } = this;
       return (activeStudentRow) ? activeStudentRow.id : false;
