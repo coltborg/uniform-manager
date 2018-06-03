@@ -9,7 +9,7 @@ import Configuration from '../services/configuration';
 
 const studentSchema = new schema.Entity('students', {}, {
   idAttribute: (value) => {
-    return value.fields.id[Configuration.locale]
+    return value.sys.id
   },
   processStrategy: function(value, parent) {
     var values = Object.keys(value.fields).reduce((prev, key) => {
@@ -19,7 +19,8 @@ const studentSchema = new schema.Entity('students', {}, {
     return {
       ...values,
       sysId: value.sys.id,
-      sys: value.sys
+      sys: value.sys,
+      id: value.sys.id
     }
   }
 })
