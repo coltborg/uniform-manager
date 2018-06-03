@@ -6,6 +6,7 @@ import { normalize, schema } from 'normalizr';
 import { createClient } from 'contentful-management';
 import Configuration from '../services/configuration';
 
+
 const studentSchema = new schema.Entity('students', {}, {
   idAttribute: (value) => {
     return value.fields.id[Configuration.locale]
@@ -17,7 +18,8 @@ const studentSchema = new schema.Entity('students', {}, {
     }, {});
     return {
       ...values,
-      sysId: value.sys.id
+      sysId: value.sys.id,
+      sys: value.sys
     }
   }
 })

@@ -43,7 +43,6 @@ export default {
         return assignedStudent;
       }
 
-
       return false;
     },
 
@@ -53,7 +52,7 @@ export default {
     },
 
     ownerDisplayId() {
-      const { owner } = this.owner;
+      const { owner } = this;
       return (owner && owner.fields) ? owner.fields.id : '---';
     },
 
