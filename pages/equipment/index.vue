@@ -3,16 +3,18 @@
     section.mt-8.mx-4
       h1.mt-0.mb-4.text-3xl.font-bold Equipment
       div(
-          v-if="allEquipmentRaw"
+          v-if="allFormattedEquipment"
       )
         .grid.bg-grey-lightest
-          .p-2.text-grey-dark.font-bold Equip. ID
+          .p-2.text-grey-dark.font-bold Equip. Number
           .p-2.text-grey-dark.font-bold Owner Name
           .p-2.text-grey-dark.font-bold Owner ID
         equipment-short(
-          v-for="(equipment, index) in allEquipmentRaw"
-          :key="index"
-          :equipment="equipment"
+          v-for="(value, key) in allFormattedEquipment"
+          :key="key"
+          :equipment="value"
+          :active="activeId === key"
+          v-on:selectRow="handleSelectRow"
         )
 </template>
 
@@ -26,7 +28,7 @@ export default {
   },
 
   data: () => ({
-    activeStudentRow: null,
+    activeId: null,
   }),
 
   computed: {
@@ -35,13 +37,15 @@ export default {
     }),
 
     ...mapGetters('equipment', [
-      'allEquipment',
+      'allFormattedEquipment',
       'allEquipmentRaw',
     ]),
   },
 
   methods: {
-
+    handleSelectRow(row) {
+      this.activeId = row.id;
+    },
   },
 };
 </script>

@@ -2,27 +2,39 @@
 // Students Store Module - import other modules
 import { normalize, schema } from 'normalizr'
 
-// import conteful client and tokens
+// import contentful client and tokens
 import { createClient } from 'contentful-management'
 import Configuration from '../services/configuration';
 
-const equipmentSchema = new schema.Entity('item', {}, {
+const equipmentSchema = new schema.Entity('items', {}, {
   idAttribute: (value) => {
-    return value.fields.id[Configuration.locale]
+    return value.sys.id;
   },
   processStrategy: function(value, parent) {
     var values = Object.keys(value.fields).reduce((prev, key) => {
       prev[key] = value.fields[key][Configuration.locale];
+      if (key === 'assignedToStudentId') {
+        prev[key] = prev[key].sys.id;
+      }
       return prev;
     }, {});
     return {
       ...values,
-      sysId: value.sys.id
+      sys: value.sys
     }
   }
 })
 
 const equipmentList = new schema.Array(equipmentSchema)
+
+const uniformBagsSchema = new schema.Entity('formatted', {}, {
+  idAttribute: (value) => {
+    return value.sys.id;
+  },
+  processStrategy: function(value, parent) {
+
+  }
+});
 
 export const state = () => ({
   uniformBags: {},
@@ -42,23 +54,7 @@ export const state = () => ({
 })
 
 export const getters = {
-  allEquipmentIds(state, getters) {
-
-  },
-
-  allEquipmentByIds( state, getters) {
-
-  },
-
   allEquipmentRaw(state, getters) {
-
-    // console.log(this.uniformBagsRaw,
-    //     this.trackSuitsRaw,
-    //     this.shakosRaw,
-    //     this.jacketsRaw,
-    //     this.guantletsRaw,
-    //     this.colorGuardShirtsRaw,
-    //     this.bibbersRaw)
 
     const mergedArrays = [].concat.apply([],
       [
@@ -68,11 +64,31 @@ export const getters = {
         state.jacketsRaw,
         state.guantletsRaw,
         state.colorGuardShirtsRaw,
-        // state.bibbersRaw
+        state.bibbersRaw,
       ]
     )
 
     return mergedArrays
+  },
+
+  uniformBagsFormatted(state, getters) {
+    return state.uniformBags;
+  },
+
+  allFormattedEquipment(state, getters) {
+
+    const mergedStates = 
+      {
+        ...getters.uniformBagsFormatted,
+        ...state.trackSuits,
+        ...state.shakos,
+        ...state.jackets,
+        ...state.guantlets,
+        ...state.colorGuardShirts,
+        ...state.bibbers,
+      };
+
+    return mergedStates
   },
 }
 
@@ -156,22 +172,25 @@ export const actions = {
     ])
 
     commit('setUniformBagsRaw', uniformBags.items)
-    commit('setUniformBags', normalize(uniformBags.items, equipmentList))
+    commit('setUniformBags', normalize(uniformBags.items, equipmentList).entities.items || [])
 
     commit('setTrackSuitsRaw', trackSuits.items)
-    commit('setTrackSuits', normalize(trackSuits.items, equipmentList))
+    commit('setTrackSuits', normalize(trackSuits.items, equipmentList).entities.items || [])
 
     commit('setShakosRaw', shakos.items)
-    commit('setShakos', normalize(shakos.items, equipmentList))
+    commit('setShakos', normalize(shakos.items, equipmentList).entities.items || [])
 
     commit('setJacketsRaw', jackets.items)
-    commit('setJackets', normalize(jackets.items, equipmentList))
+    commit('setJackets', normalize(jackets.items, equipmentList).entities.items || [])
 
     commit('setGuantletsRaw', gauntlets.items)
-    commit('setGuantlets', normalize(gauntlets.items, equipmentList))
+    commit('setGuantlets', normalize(gauntlets.items, equipmentList).entities.items || [])
 
     commit('setColorGuardShirtsRaw', colorGuardShirts.items)
-    commit('setColorGuardShirts', normalize(colorGuardShirts.items, equipmentList))
+    commit('setColorGuardShirts', normalize(colorGuardShirts.items, equipmentList).entities.items || [])
+
+    commit('setBibbersRaw', bibbers.items)
+    commit('setBibbers', normalize(bibbers.items, equipmentList).entities.items || [])
   }
 }
 
