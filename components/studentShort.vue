@@ -12,43 +12,43 @@
       :class="{'input--editMode': editMode}"
       :value="bibberNumber"
       class="w-full bg-transparent px-2 py-2 text-black cursor-default"
-      @change="updateInput">
+      @change="updateInput('bibber', $event)">
     <input
       :disabled="editMode == false"
       :class="{'input--editMode': editMode}"
       :value="colorGuardShirtNumber"
       class="w-full bg-transparent px-2 py-2 text-black cursor-default"
-      @change="updateInput">
+      @change="updateInput('colorGuardShirt', $event)">
     <input
       :disabled="editMode == false"
       :class="{'input--editMode': editMode}"
       :value="guantletNumber"
       class="w-full bg-transparent px-2 py-2 text-black cursor-default"
-      @change="updateInput">
+      @change="updateInput('guantlet', $event)">
     <input
       :disabled="editMode == false"
       :class="{'input--editMode': editMode}"
       :value="jacketNumber"
       class="w-full bg-transparent px-2 py-2 text-black cursor-default"
-      @change="updateInput">
+      @change="updateInput('jacket', $event)">
     <input
       :disabled="editMode == false"
       :class="{'input--editMode': editMode}"
       :value="shakoNumber"
       class="w-full bg-transparent px-2 py-2 text-black cursor-default"
-      @change="updateInput">
+      @change="updateInput('shako', $event)">
     <input
       :disabled="editMode == false"
       :class="{'input--editMode': editMode}"
       :value="trackSuitNumber"
       class="w-full bg-transparent px-2 py-2 text-black cursor-default"
-      @change="updateInput">
+      @change="updateInput('trackSuit', $event)">
     <input
       :disabled="editMode == false"
       :class="{'input--editMode': editMode}"
       :value="uniformBagNumber"
       class="w-full bg-transparent px-2 py-2 text-black cursor-default"
-      @change="updateInput">
+      @change="updateInput('uniformBag', $event)">
   </div>
 </template>
 
@@ -73,6 +73,19 @@ export default {
       default: false,
     },
   },
+
+  data: () => ({
+    updateValues: {
+      bibber: '',
+      colorGuardShirt: '',
+      guantlet: '',
+      jacket: '',
+      shako: '',
+      trackSuit: '',
+      uniformBag: '',
+    },
+    updateRequired: false,
+  }),
   computed: {
     ...mapState('students', {
       students: state => state.students,
@@ -99,36 +112,71 @@ export default {
 
     bibberNumber() {
       const bibber = this.studentEquipment.filter(eqp => eqp.type === 'bibbers');
+      const { updateValues } = this;
+
+      if (updateValues.bibber) {
+        return updateValues.bibber;
+      }
       return (bibber[0]) ? bibber[0].number : '';
     },
 
     colorGuardShirtNumber() {
       const colorGuardShirt = this.studentEquipment.filter(eqp => eqp.type === 'colorGuardShirts');
+      const { updateValues } = this;
+
+      if (updateValues.colorGuardShirt) {
+        return updateValues.colorGuardShirt;
+      }
       return (colorGuardShirt[0]) ? colorGuardShirt[0].number : '';
     },
 
     guantletNumber() {
       const guantlet = this.studentEquipment.filter(eqp => eqp.type === 'guantlets');
+      const { updateValues } = this;
+
+      if (updateValues.guantlet) {
+        return updateValues.guantlet;
+      }
       return (guantlet[0]) ? guantlet[0].number : '';
     },
 
     jacketNumber() {
       const jacket = this.studentEquipment.filter(eqp => eqp.type === 'jackets');
+      const { updateValues } = this;
+
+      if (updateValues.jacket) {
+        return updateValues.jacket;
+      }
       return (jacket[0]) ? jacket[0].number : '';
     },
 
     shakoNumber() {
       const shako = this.studentEquipment.filter(eqp => eqp.type === 'shakos');
+      const { updateValues } = this;
+
+      if (updateValues.shako) {
+        return updateValues.shako;
+      }
       return (shako[0]) ? shako[0].number : '';
     },
 
     trackSuitNumber() {
       const trackSuit = this.studentEquipment.filter(eqp => eqp.type === 'trackSuits');
+      const { updateValues } = this;
+
+      if (updateValues.trackSuit) {
+        return updateValues.trackSuit;
+      }
       return (trackSuit[0]) ? trackSuit[0].number : '';
     },
 
     uniformBagNumber() {
       const uniformBag = this.studentEquipment.filter(eqp => eqp.type === 'uniformBags');
+      const { updateValues } = this;
+
+      if (updateValues.uniformBag) {
+        return updateValues.uniformBag;
+      }
       return (uniformBag[0]) ? uniformBag[0].number : '';
     },
   },
@@ -138,8 +186,13 @@ export default {
       this.$emit('selectStudentRow', this.student);
     },
 
-    updateInput() {
-      console.log('input updated');
+    updateInput(type, $event) {
+      const newValue = $event.target.value;
+
+      console.log(type, $event.target.value);
+
+      this.updateRequired = true;
+      this.updateValues[type] = newValue;
     },
   },
 };
