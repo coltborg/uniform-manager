@@ -1,5 +1,5 @@
 <template>
-  <div class="font-sans text-black bg-grey-light min-h-screen">
+  <div class="font-sans text-black bg-grey-lighter min-h-screen">
     <app-header />
     <nuxt />
   </div>

@@ -1,28 +1,29 @@
 <template>
-  <header class="px-4 pt-2 flex items-center justify-between shadow-md bg-white">
-    <div>
-      <h1 class="text-2xl uppercase tracking-wide font-semibold">Uniform Manager</h1>
-      <div>
+  <header class="px-4 flex items-center justify-between shadow-md bg-white">
+    <div class="flex items-center">
+      <h1 class="mr-6 text-xl uppercase tracking-wide font-semibold header-link">Uniform Manager</h1>
+      <div class="flex">
         <nuxt-link
-          class="mr-4 no-underline"
+          :class="homeRoute"
+          class="mr-4 no-underline text-grey-darker header-link"
           to="/">
           Home
         </nuxt-link>
         <nuxt-link
-          class="mr-4 no-underline"
+          :class="studentsRoute"
+          class="mr-4 no-underline text-grey-darker header-link"
           to="students">
           Students
         </nuxt-link>
         <nuxt-link
-          class="no-underline"
+          :class="equipmentRoute"
+          class="no-underline text-grey-darker header-link"
           to="equipment">
           Equipment
         </nuxt-link>
       </div>
     </div>
-    <div>
-      <profile-dropdown />
-    </div>
+    <profile-dropdown />
   </header>
 </template>
 
@@ -34,5 +35,28 @@ export default {
   components: {
     ProfileDropdown,
   },
+  computed: {
+    homeRoute() {
+      return { 'is-active': this.$route.name === 'index' };
+    },
+    studentsRoute() {
+      return { 'is-active': this.$route.name === 'students' };
+    },
+    equipmentRoute() {
+      return { 'is-active': this.$route.name === 'equipment' };
+    },
+  },
 };
 </script>
+
+<style scoped>
+.header-link {
+  line-height: 40px;
+  border-bottom: 4px solid transparent;
+  border-top: 4px solid transparent;
+}
+
+.header-link.is-active {
+  border-bottom-color: #3490DC;
+}
+</style>
