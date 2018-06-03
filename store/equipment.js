@@ -6,6 +6,10 @@ import { normalize, schema } from 'normalizr'
 import { createClient } from 'contentful-management'
 import Configuration from '../services/configuration';
 
+function formatType(type) {
+  return type;
+}
+
 const equipmentSchema = new schema.Entity('items', {}, {
   idAttribute: (value) => {
     return value.sys.id;
@@ -22,6 +26,7 @@ const equipmentSchema = new schema.Entity('items', {}, {
       ...values,
       sys: value.sys,
       id: value.sys.id,
+      type: formatType(value.sys.contentType.sys.id)
     }
   }
 })
