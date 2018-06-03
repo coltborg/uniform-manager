@@ -50,7 +50,7 @@ export default {
     },
 
     ownerDisplayId() {
-      const { owner } = this.owner;
+      const { owner } = this;
       return (owner) ? owner.id : '---';
     },
   },
