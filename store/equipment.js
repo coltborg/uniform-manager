@@ -7,7 +7,32 @@ import { createClient } from 'contentful-management'
 import Configuration from '../services/configuration';
 
 function formatType(type) {
-  return type;
+  const pascalCase = type[0].toUpperCase() + type.substring(1);
+  const singular = pascalCase.substring(0, pascalCase.length - 1)
+  const words = singular.match(/[A-z][a-z]*/g);
+  return words.join(' ');
+}
+
+function formattedEquipment(value, description) {
+  return {
+    id: value.id,
+    number: value.number,
+    assignedToStudentId: value.assignedToStudentId,
+    type: value.type,
+    description: description,
+  }
+}
+
+function toFormattedEquipment(equipment, descriptionFormat) {
+    const formatted = Object.keys(equipment).reduce((prev, curr) => {
+      const value = equipment[curr];
+      prev[value.id] = formattedEquipment(
+        value,
+        descriptionFormat(value)
+      );
+      return prev;
+    }, {})
+    return formatted;
 }
 
 const equipmentSchema = new schema.Entity('items', {}, {
@@ -78,31 +103,44 @@ export const getters = {
   },
 
   bibbersFormatted(state, getters) {
-    const { ...bibbers } = state.bibbers;
-    const formatted = Object.keys(bibbers).reduce((prev, curr) => {
-      const value = bibbers[curr];
-      prev[value.id] = {
-        id: value.id,
-        number: value.number,
-        assignedToStudentId: value.assignedToStudentId,
-        type: value.type,
-        description: `${value.waist} W ${value.inseam} L`,
-      };
-      return prev;
-    }, {})
-    return formatted;
+    const { ...equipment } = state.bibbers;
+    return toFormattedEquipment(equipment, value => `Size: ${value.waist} W ${value.inseam} L`)
+  },
+  colorGuardShirtsFormatted(state, getters) {
+    const { ...equipment } = state.colorGuardShirts;
+    return toFormattedEquipment(equipment, value => `Size: ${value.size}`)
+  },
+  guantletsFormatted(state, getters) {
+    const { ...equipment } = state.guantlets;
+    return toFormattedEquipment(equipment, value => `Number: ${value.number}`)
+  },
+  jacketsFormatted(state, getters) {
+    const { ...equipment } = state.jackets;
+    return toFormattedEquipment(equipment, value => `Size: ${value.height}H/${value.chest}C Gender: ${value.gender}`)
+  },
+  shakosFormatted(state, getters) {
+    const { ...equipment } = state.shakos;
+    return toFormattedEquipment(equipment, value => `Size: ${value.hatSize}`)
+  },
+  trackSuitsFormatted(state, getters) {
+    const { ...equipment } = state.trackSuits;
+    return toFormattedEquipment(equipment, value => `Size: ${value.size}`)
+  },
+  uniformBagsFormatted(state, getters) {
+    const { ...equipment } = state.uniformBags;
+    return toFormattedEquipment(equipment, value => `Number: ${value.number}`)
   },
 
   allFormattedEquipment(state, getters) {
 
     const mergedStates = 
       {
-        // ...getters.uniformBagsFormatted,
-        // ...state.trackSuits,
-        // ...state.shakos,
-        // ...state.jackets,
-        // ...state.guantlets,
-        // ...state.colorGuardShirts,
+        ...getters.uniformBagsFormatted,
+        ...getters.trackSuitsFormatted,
+        ...getters.shakosFormatted,
+        ...getters.jacketsFormatted,
+        ...getters.guantletsFormatted,
+        ...getters.colorGuardShirtsFormatted,
         ...getters.bibbersFormatted,
       };
 

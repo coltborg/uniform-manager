@@ -6,9 +6,10 @@
           v-if="allFormattedEquipment"
       )
         .grid.bg-grey-lightest
-          .p-2.text-grey-dark.font-bold Equip. Number
+          .p-2.text-grey-dark.font-bold Type
+          .p-2.text-grey-dark.font-bold Number
+          .p-2.text-grey-dark.font-bold Description
           .p-2.text-grey-dark.font-bold Owner Name
-          .p-2.text-grey-dark.font-bold Owner ID
         equipment-short(
           v-for="(value, key) in allFormattedEquipment"
           :key="key"
@@ -33,12 +34,11 @@ export default {
 
   computed: {
     ...mapState('equipment', {
-      equipment: state => state,
+      // equipment: state => state,
     }),
 
     ...mapGetters('equipment', [
       'allFormattedEquipment',
-      'allEquipmentRaw',
     ]),
   },
 
@@ -55,7 +55,7 @@ export default {
   display: grid;
   grid-template:
     1fr
-    / 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    / 1fr 1fr 1fr 1fr;
   grid-column-gap: 1rem;
   grid-row-gap: 0.5rem;
 }

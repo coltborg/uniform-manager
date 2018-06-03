@@ -3,13 +3,10 @@
     v-if="equipment"
     :class="{'bg-orange-lightest border-orange': active}"
   )
+    .px-2.py-2.text-black {{ equipment.type }}
     .px-2.py-2.text-black {{ equipment.number }}
+    .px-2.py-2.text-black {{ equipment.description }}
     .px-2.py-2.text-black {{ ownerDisplayName }}
-    .px-2.py-2.text-black {{ }}
-    .px-2.py-2.text-black ---
-    .px-2.py-2.text-black ---
-    .px-2.py-2.text-black ---
-    .px-2.py-2.text-black ---
 </template>
 
 <script>
@@ -30,15 +27,15 @@ export default {
 
   computed: {
     ...mapState('students', {
-      // students: state => state.students,
+      students: state => state.students,
       // studentRaw: state => state.studentsRaw
     }),
 
     owner() {
       const assignedStudent = this.equipment.assignedToStudentId;
 
-      if (assignedStudent) {
-        return assignedStudent;
+      if (assignedStudent && this.students) {
+        return this.students.entities.students[assignedStudent];
       }
 
       return false;
@@ -67,8 +64,7 @@ export default {
 .grid {
   display: grid;
   grid-template:
-    1fr
-    / 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    1fr 1fr 1fr 1fr;
   grid-column-gap: 1rem;
   grid-row-gap: 0.5rem;
 }

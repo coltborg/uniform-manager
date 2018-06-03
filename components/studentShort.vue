@@ -188,9 +188,6 @@ export default {
 
     updateInput(type, $event) {
       const newValue = $event.target.value;
-
-      console.log(type, $event.target.value);
-
       this.updateRequired = true;
       this.updateValues[type] = newValue;
     },
