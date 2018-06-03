@@ -1,7 +1,11 @@
 <template>
   <header class="px-4 flex items-center justify-between shadow-md bg-white">
     <div class="flex items-center">
-      <h1 class="mr-6 text-xl uppercase tracking-wide font-semibold header-link">Uniform Manager</h1>
+      <nuxt-link
+        class="mr-8 text-black no-underline header-link"
+        to="/">
+        <h1 class="text-xl uppercase tracking-wide font-semibold">Uniform Manager</h1>
+      </nuxt-link>
       <div class="flex">
         <nuxt-link
           :class="homeRoute"
