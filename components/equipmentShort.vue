@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-import Configuration from "../services/configuration";
+import { mapState } from 'vuex';
+import Configuration from '../services/configuration';
 
 export default {
   // data: () => {
@@ -26,48 +26,47 @@ export default {
   props: {
     equipment: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
 
   computed: {
-    ...mapState("students", {
+    ...mapState('students', {
       // students: state => state.students,
       // studentRaw: state => state.studentsRaw
     }),
 
     owner() {
-      const assignedStudent = this.equipment.fields.assignedToStudentId
+      const assignedStudent = this.equipment.fields.assignedToStudentId;
 
       if (assignedStudent) {
-        return assignedStudent
+        return assignedStudent;
       }
 
-      else {
-        return false
-      }
+
+      return false;
     },
 
     ownerDisplayName() {
-      const owner = this.owner
-      return (owner && owner.fields) ? owner.fields.name : '---'
+      const { owner } = this;
+      return (owner && owner.fields) ? owner.fields.name : '---';
     },
 
     ownerDisplayId() {
-      const owner = this.owner
-      return (owner && owner.fields) ? owner.fields.id : '---'
+      const { owner } = this.owner;
+      return (owner && owner.fields) ? owner.fields.id : '---';
     },
 
     equipmentId() {
-      return this.equipment.fields.id[Configuration.locale]
-    }
+      return this.equipment.fields.id[Configuration.locale];
+    },
   },
 
   methods: {
     clickedStudent() {
 
-    }
-  }
+    },
+  },
 };
 </script>
 

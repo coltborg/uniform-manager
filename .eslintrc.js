@@ -19,6 +19,7 @@ module.exports = {
   ],
   // add your custom rules here
   rules: {
+    'global-require': 'off',
     // remove max-len rule
     'max-len': [0],
     // don't require .vue extension when importing

@@ -7,11 +7,11 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'A Nuxt.js project to manage band equipment.' }
+      { hid: 'description', name: 'description', content: 'A Nuxt.js project to manage band equipment.' },
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+    ],
   },
   /*
   ** Customize the progress bar color
@@ -24,19 +24,19 @@ module.exports = {
     /*
     ** Run ESLint on save
     */
-    extend (config, { isDev, isClient }) {
+    extend(config, { isDev, isClient }) {
       if (isDev && isClient) {
         config.module.rules.push({
           enforce: 'pre',
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
-          exclude: /(node_modules)/
-        })
+          exclude: /(node_modules)/,
+        });
       }
-    }
+    },
   },
   /*
   ** Link to CSS
   */
- css: ['~/assets/css/tailwind.css']
-}
+  css: ['~/assets/css/tailwind.css'],
+};

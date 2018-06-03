@@ -43,7 +43,7 @@ View the full documentation at https://tailwindcss.com.
 |
 */
 
-let colors = {
+const colors = {
   'transparent': 'transparent',
 
   'black': '#22292f',
@@ -127,7 +127,7 @@ let colors = {
   'pink-light': '#fa7ea8',
   'pink-lighter': '#ffbbca',
   'pink-lightest': '#ffebef',
-}
+};
 
 module.exports = {
 
@@ -144,7 +144,7 @@ module.exports = {
   |
   */
 
-  colors: colors,
+  colors,
 
 
   /*
@@ -226,7 +226,7 @@ module.exports = {
       'Liberation Mono',
       'Courier New',
       'monospace',
-    ]
+    ],
   },
 
 
@@ -250,15 +250,15 @@ module.exports = {
   */
 
   textSizes: {
-    'xs': '.75rem',     // 12px
-    'sm': '.875rem',    // 14px
-    'base': '1rem',     // 16px
-    'lg': '1.125rem',   // 18px
-    'xl': '1.25rem',    // 20px
-    '2xl': '1.5rem',    // 24px
-    '3xl': '1.875rem',  // 30px
-    '4xl': '2.25rem',   // 36px
-    '5xl': '3rem',      // 48px
+    'xs': '.75rem', // 12px
+    'sm': '.875rem', // 14px
+    'base': '1rem', // 16px
+    'lg': '1.125rem', // 18px
+    'xl': '1.25rem', // 20px
+    '2xl': '1.5rem', // 24px
+    '3xl': '1.875rem', // 30px
+    '4xl': '2.25rem', // 36px
+    '5xl': '3rem', // 48px
   },
 
 
@@ -394,7 +394,7 @@ module.exports = {
   */
 
   borderWidths: {
-    default: '1px',
+    'default': '1px',
     '0': '0',
     '2': '2px',
     '4': '4px',
@@ -441,7 +441,7 @@ module.exports = {
   borderRadius: {
     'none': '0',
     'sm': '.125rem',
-    default: '.25rem',
+    'default': '.25rem',
     'lg': '.5rem',
     'full': '9999px',
   },
@@ -495,7 +495,7 @@ module.exports = {
     '1/6': '16.66667%',
     '5/6': '83.33333%',
     'full': '100%',
-    'screen': '100vw'
+    'screen': '100vw',
   },
 
 
@@ -531,7 +531,7 @@ module.exports = {
     '48': '12rem',
     '64': '16rem',
     'full': '100%',
-    'screen': '100vh'
+    'screen': '100vh',
   },
 
 
@@ -572,7 +572,7 @@ module.exports = {
   minHeight: {
     '0': '0',
     'full': '100%',
-    'screen': '100vh'
+    'screen': '100vh',
   },
 
 
@@ -724,7 +724,7 @@ module.exports = {
   */
 
   shadows: {
-    default: '0 2px 4px 0 rgba(0,0,0,0.10)',
+    'default': '0 2px 4px 0 rgba(0,0,0,0.10)',
     'md': '0 4px 8px 0 rgba(0,0,0,0.12), 0 2px 4px 0 rgba(0,0,0,0.08)',
     'lg': '0 15px 30px 0 rgba(0,0,0,0.11), 0 5px 15px 0 rgba(0,0,0,0.08)',
     'inner': 'inset 0 2px 4px 0 rgba(0,0,0,0.06)',
@@ -899,10 +899,10 @@ module.exports = {
   */
 
   plugins: [
-    require('tailwindcss/plugins/container')({
-      // center: true,
-      // padding: '1rem',
-    }),
+    // require('tailwindcss/plugins/container')({
+    //   center: true,
+    //   padding: '1rem',
+    // }),
   ],
 
 
@@ -922,4 +922,4 @@ module.exports = {
     separator: ':',
   },
 
-}
+};
