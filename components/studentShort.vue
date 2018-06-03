@@ -15,39 +15,33 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState } from 'vuex';
 
 export default {
-
-  data: () => {
-    return {
-
-    }
-  },
 
   props: {
     student: {
       type: Object,
-      required: true
+      required: true,
     },
 
     activeStudentRowId: {
-      default: false
-    }
+      type: [Boolean, String, Number],
+      default: false,
+    },
   },
-
   computed: {
-    ...mapState("students", {
+    ...mapState('students', {
       students: state => state.students,
-      studentRaw: state => state.studentsRaw
-    })
+      studentRaw: state => state.studentsRaw,
+    }),
   },
 
   methods: {
     selectStudentRow() {
-      this.$emit("selectStudentRow", this.student);
-    }
-  }
+      this.$emit('selectStudentRow', this.student);
+    },
+  },
 };
 </script>
 

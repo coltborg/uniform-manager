@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Students Store Module - import other modules
 import { normalize, schema } from 'normalizr';
 

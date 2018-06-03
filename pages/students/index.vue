@@ -24,37 +24,35 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-import studentShort from "~/components/studentShort.vue";
+import { mapState } from 'vuex';
+import studentShort from '~/components/studentShort.vue';
 
 export default {
   components: {
-    studentShort
+    studentShort,
   },
 
-  data: () => {
-    return {
-      activeStudentRow: null
-    };
-  },
+  data: () => ({
+    activeStudentRow: null,
+  }),
 
   computed: {
-    ...mapState("students", {
+    ...mapState('students', {
       students: state => state.students,
-      studentRaw: state => state.studentsRaw
+      studentRaw: state => state.studentsRaw,
     }),
 
     activeStudentRowId() {
-      let activeStudentRow = this.activeStudentRow
-      return (activeStudentRow) ? activeStudentRow.id : false
-    }
+      const { activeStudentRow } = this;
+      return (activeStudentRow) ? activeStudentRow.id : false;
+    },
   },
 
   methods: {
     handleSelectStudentRow(student) {
       this.activeStudentRow = student;
-    }
-  }
+    },
+  },
 };
 </script>
 

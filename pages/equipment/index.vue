@@ -4,7 +4,6 @@
       h1.mt-0.mb-4.text-3xl.font-bold Equipment
       div(
           v-if="allEquipmentRaw"
-        
       )
         .grid.bg-grey-lightest
           .p-2.text-grey-dark.font-bold Equip. ID
@@ -18,34 +17,32 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
-import equipmentShort from "~/components/equipmentShort.vue";
+import { mapState, mapGetters } from 'vuex';
+import equipmentShort from '~/components/equipmentShort.vue';
 
 export default {
   components: {
-    equipmentShort
+    equipmentShort,
   },
 
-  data: () => {
-    return {
-      activeStudentRow: null
-    }
-  },
+  data: () => ({
+    activeStudentRow: null,
+  }),
 
   computed: {
     ...mapState('equipment', {
-      equipment: state => state
+      equipment: state => state,
     }),
 
     ...mapGetters('equipment', [
       'allEquipment',
-      'allEquipmentRaw'
-    ])
+      'allEquipmentRaw',
+    ]),
   },
 
   methods: {
 
-  }
+  },
 };
 </script>
 
