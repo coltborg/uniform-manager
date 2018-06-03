@@ -20,7 +20,8 @@ const equipmentSchema = new schema.Entity('items', {}, {
     }, {});
     return {
       ...values,
-      sys: value.sys
+      sys: value.sys,
+      id: value.sys.id,
     }
   }
 })
@@ -71,21 +72,32 @@ export const getters = {
     return mergedArrays
   },
 
-  uniformBagsFormatted(state, getters) {
-    return state.uniformBags;
+  bibbersFormatted(state, getters) {
+    const { ...bibbers } = state.bibbers;
+    const formatted = Object.keys(bibbers).reduce((prev, curr) => {
+      const value = bibbers[curr];
+      prev[value.id] = {
+        id: value.id,
+        number: value.number,
+        type: 'Bibber',
+        description: `${value.waist} W ${value.inseam} L`,
+      };
+      return prev;
+    }, {})
+    return formatted;
   },
 
   allFormattedEquipment(state, getters) {
 
     const mergedStates = 
       {
-        ...getters.uniformBagsFormatted,
-        ...state.trackSuits,
-        ...state.shakos,
-        ...state.jackets,
-        ...state.guantlets,
-        ...state.colorGuardShirts,
-        ...state.bibbers,
+        // ...getters.uniformBagsFormatted,
+        // ...state.trackSuits,
+        // ...state.shakos,
+        // ...state.jackets,
+        // ...state.guantlets,
+        // ...state.colorGuardShirts,
+        ...getters.bibbersFormatted,
       };
 
     return mergedStates
