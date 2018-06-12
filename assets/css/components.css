@@ -1,0 +1,41 @@
+.btn {
+  @apply .py-2 .px-4 .rounded;
+}
+
+.btn-blue {
+  @apply .bg-blue .text-white;
+}
+
+.btn-green {
+  @apply .bg-green .text-white;
+}
+
+.btn-red {
+  @apply .bg-red .text-white;
+}
+
+.btn-blue:hover {
+  @apply .bg-blue-dark;
+}
+
+.btn-green:hover {
+  @apply .bg-green-dark;
+}
+
+.btn-red:hover {
+  @apply .bg-red-dark;
+}
+
+.card {
+  @apply .bg-white .shadow .rounded .p-3
+}
+
+@responsive {
+  .home-grid {
+    display: grid;
+    grid-template:
+      auto
+      / 1fr 2fr;
+    grid-gap: 1.5rem;
+  }
+}
