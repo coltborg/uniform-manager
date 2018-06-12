@@ -793,6 +793,7 @@ module.exports = {
   */
 
   svgFill: {
+    'transparent': 'transparent',
     'current': 'currentColor',
   },
 
@@ -812,6 +813,7 @@ module.exports = {
   */
 
   svgStroke: {
+    'transparent': 'transparent',
     'current': 'currentColor',
   },
 
