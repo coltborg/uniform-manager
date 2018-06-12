@@ -1,11 +1,14 @@
 <template>
-  <header class="px-4 flex items-center justify-between shadow-md bg-white">
-    <div class="flex items-center">
-      <nuxt-link
-        class="mr-8 text-black no-underline header-link"
-        to="/">
-        <h1 class="text-xl uppercase tracking-wide font-semibold">Uniform Manager</h1>
-      </nuxt-link>
+  <header class="px-2 sm:px-4 sm:flex sm:items-center sm:justify-between shadow-md bg-white">
+    <div class="sm:flex sm:items-center">
+      <div class="flex items-center justify-between">
+        <nuxt-link
+          class="sm:mr-8 text-black no-underline header-link"
+          to="/">
+          <h1 class="text-xl uppercase tracking-wide font-semibold">Uniform Manager</h1>
+        </nuxt-link>
+        <profile-dropdown class="sm:hidden" />
+      </div>
       <div class="flex">
         <nuxt-link
           :class="homeRoute"
@@ -27,7 +30,7 @@
         </nuxt-link>
       </div>
     </div>
-    <profile-dropdown />
+    <profile-dropdown class="hidden sm:block" />
   </header>
 </template>
 
@@ -61,6 +64,6 @@ export default {
 }
 
 .header-link.is-active {
-  border-bottom-color: #3490DC;
+  border-bottom-color: #38C172;
 }
 </style>
