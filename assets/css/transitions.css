@@ -1,0 +1,13 @@
+.trans-bg-color {
+  transition: background-color 150ms linear;
+}
+
+.trans-text-color {
+  transition: color 150ms linear;
+}
+
+.trans-both-color {
+  transition:
+    background-color 150ms linear,
+    color 150ms linear;
+}
