@@ -48,6 +48,10 @@
   @apply .bg-red-dark;
 }
 
+.card {
+  @apply .bg-white .shadow .rounded .p-3
+}
+
 /**
   * Here you would add any of your custom component classes; stuff that you'd
   * want loaded *before* the utilities so that the utilities could still
