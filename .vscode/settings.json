@@ -21,5 +21,6 @@
       "language": "vue",
       "autoFix": true
     },
-  ]
+  ],
+  "npm.enableScriptExplorer": true
 }
